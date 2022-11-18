@@ -7,6 +7,8 @@ module.exports = {
 		.addChannelOption(Option =>
 			Option.setName("destination")
 				.addChannelTypes(ChannelType.GuildText)
+				.addChannelTypes(ChannelType.GuildAnnouncement)
+				.addChannelTypes(ChannelType.AnnouncementThread)
 				.setDescription("destination channel")
 				.setRequired(true),
 		)
@@ -32,8 +34,6 @@ module.exports = {
 		// const message = await channel.messages.fetch(messageId);
 		// console.log(message);
 		const messageFromID = await channel.messages.fetch(messageId);
-		console.log(messageFromID.attachments);
-
 		const message = {
 			content: messageFromID.content,
 			files: [],
@@ -46,7 +46,7 @@ module.exports = {
 					description: file[1].description,
 				});
 		}
-		await interaction.deferReply({ephemeral:true});
+		await interaction.deferReply({ ephemeral: true });
 		await targetChannel.send(message);
 		await interaction.editReply({
 			content: "Done!",
