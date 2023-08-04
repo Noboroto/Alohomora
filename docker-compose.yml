@@ -1,4 +1,4 @@
 discord_bot:
-  container_name: sab-bot
+  container_name: alohomora-bot
   build: .
   restart: unless-stopped
