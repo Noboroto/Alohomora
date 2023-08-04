@@ -1,4 +1,5 @@
 import { SlashCommandBuilder, PermissionFlagsBits, ChatInputCommandInteraction } from "discord.js";
+import { getMessageFromOption } from "../ultils";
 
 const emojiPoll = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"];
 
@@ -50,14 +51,4 @@ export default {
 			content: "Done!",
 		});
 	},
-};
-
-const getMessageFromOption = async (interaction, optionName) => {
-	const messageLink = await interaction.options.getString(optionName);
-	const part = messageLink.split("/");
-	const channelId = part[part.length - 2];
-	const messageId = part[part.length - 1];
-	const channel = await interaction.client.channels.fetch(channelId);
-	const messageFromID = await channel.messages.fetch(messageId);
-	return messageFromID;
 };
