@@ -7,15 +7,13 @@ WORKDIR /usr/src/bot
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
-COPY ./src/package*.json ./
-COPY ./src ./
+COPY ./root/package*.json ./
+COPY ./root ./
 
-RUN npm install --only=production
+RUN yarn install --production
 # If you are building your code for production
-# RUN npm ci --only=production
+# RUN npm --omit=dev
 
 # Bundle app source
 
-CMD [ "node", "delete-all-commands.js"]
-CMD [ "node", "deploy-global-commands.js"]
-CMD [ "node", "main.js" ]
+CMD [ "yarn", "start" ]
