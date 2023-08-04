@@ -1,6 +1,5 @@
 import { ChatInputCommandInteraction, TextChannel, Message } from "discord.js";
 
-
 export const getMessageFromOption = async (interaction: ChatInputCommandInteraction, optionName:string) => {
 	const messageLink = await interaction.options.getString(optionName);
 	const part = messageLink.split("/");
