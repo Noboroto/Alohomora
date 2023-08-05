@@ -9,7 +9,7 @@ export default {
 		.setDescription("react to a messsage!")
 		.addStringOption((Option) => Option.setName("message-link").setDescription("message link").setRequired(true))
 
-		.addStringOption((Option) => Option.setName("emoji").setDescription("emoji").setMaxLength(1).setRequired(true))
+		.addStringOption((Option) => Option.setName("emoji").setDescription("emoji").setMaxLength(2).setRequired(true))
 
 		.addIntegerOption((Option) =>
 			Option.setName("poll-choice-count")
