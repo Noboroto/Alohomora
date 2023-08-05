@@ -5,7 +5,7 @@ const savePath = "./files/notes.json";
 
 export default {
 	data: new SlashCommandBuilder()
-		.setName("note-by-role")
+		.setName("remove-note-by-role")
 		.setDescription("Remove saved-note by role")
 
 		.addRoleOption((Option) =>
