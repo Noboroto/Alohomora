@@ -7,9 +7,10 @@ export default {
 	data: new SlashCommandBuilder()
 		.setName("react-message")
 		.setDescription("react to a messsage!")
-		.addStringOption((Option) => Option.setName("message-link").setDescription("message link").setRequired(true))
 
 		.addStringOption((Option) => Option.setName("emoji").setDescription("emoji").setMaxLength(2).setRequired(true))
+
+		.addStringOption((Option) => Option.setName("message-link").setDescription("message link").setRequired(true))
 
 		.addIntegerOption((Option) =>
 			Option.setName("poll-choice-count")
@@ -28,19 +29,10 @@ export default {
 		await interaction.deferReply({ ephemeral: true });
 
 		const pollChoiceCount = interaction.options.getInteger("poll-choice-count") ?? 0;
-		const reaction = interaction.options.getString("emoji") ?? "";
-		const messageFromID = await getMessageFromOption(interaction, "nmessage-link");
-
-		const emojiLists = interaction.guild?.emojis.cache.filter((emoji) => emoji.name === reaction);
-
-		if (emojiLists?.size === 0) {
-			interaction.editReply({
-				content: "Emoji not found!",
-			});
-			return;
-		}
-
-		await messageFromID.react(emojiLists?.first() ?? "");
+		const reaction = interaction.options.getString("emoji")?.trim() ?? "";
+		const messageFromID = await getMessageFromOption(interaction, "message-link");
+		
+		await messageFromID.react(reaction);
 
 		for (let i = 0; i < pollChoiceCount; i++) {
 			await messageFromID.react(emojiPoll[i]);
