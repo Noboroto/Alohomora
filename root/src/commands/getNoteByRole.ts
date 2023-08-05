@@ -21,6 +21,7 @@ export default {
 		interaction.reply({
 			content: `Note for @${role.name}:\n${JSON.stringify(notesJson[role.id], null, 4)}`,
 			ephemeral: false,
+			embeds: [],
 		});
     }
 };
