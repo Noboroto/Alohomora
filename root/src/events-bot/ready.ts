@@ -8,8 +8,6 @@ export default {
 		const client = args[0] as Client;
 		console.log(`Ready! Logged in as ${client.user?.tag}`);
 
-		return;
-
 		await client.application.commands
 			.set([])
 			.then(() =>
