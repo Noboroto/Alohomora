@@ -16,7 +16,7 @@ export default {
 
 		console.log();
 		for (const command of commands) {
-			await client.application.commands
+			client.application.commands
 				.create(command.data)
 				.then(() =>
 					console.log(
