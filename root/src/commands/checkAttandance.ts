@@ -32,21 +32,14 @@ export default {
 		// interaction.member is the GuildMember object, which represents the user in the specific guild
 		//const guild = interaction.client.guilds.cache.get('Guild ID');
 
-		await interaction.deferReply({ ephemeral: false });
 		const role = interaction.options.getRole("role") as Role;
 		const voiceChannel = (await (interaction.options.getChannel("voice-channel") as VoiceChannel).fetch()) as VoiceChannel;
 
 		const members = role.members;
 		const channelMembers = voiceChannel.members.map((member) => member.id);
 
-		//console.log(members);
-		console.log(channelMembers);
-
 		const absent = members.filter((member) => channelMembers.find((id) => id === member.id) === undefined);
 		const present = members.filter((member) => channelMembers.find((id) => id === member.id) !== undefined);
-
-		const test = absent.map((member) => `${member.user}`).join("\n");
-		console.log(test);
 
 		const message = {
 			content: `**@${role.name}** has **${members.size}** members\n**${
@@ -54,12 +47,13 @@ export default {
 			}** members are present\n**${
 				absent.size
 			}** members are absent\n\n**Present Members**\n${present
-				.map((member) => `${member.user}`)
+				.map((member) => `@${member.user.username}`)
 				.join("\n")}\n\n**Absent Members**\n${absent
 				.map((member) => `${member.user}`)
 				.join("\n")}`,
+			ephemeral: false,
 		};
 
-		await interaction.editReply(message);
+		interaction.reply(message);
 	},
 };
